@@ -1,4 +1,4 @@
 package Trabajador;
 
-public class CalcularDesempeño {
+public interface CalcularDesempeño {
 }

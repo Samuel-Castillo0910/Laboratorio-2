@@ -2,7 +2,7 @@ package Trabajador;
 
 import java.util.ArrayList;
 
-public class Trabajadores {
+public class Trabajadores implements CalcularDesempeño {
     private String Name;
     private int Id;
     private ArrayList<Trabajadores> trabajador = new ArrayList<>();

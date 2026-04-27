@@ -1,5 +1,4 @@
-package Main;
-import Trabajador.Trabajadores;
+package Proyecto;
 import java.util.ArrayList;
 
 public class Proyecto {
