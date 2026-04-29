@@ -24,7 +24,7 @@ public class Worker implements calculatePerformance {
         this.performance = performance;
     }
 
-    // "this.performance" explicitly refers to the field of this object,
+    // "this.performance" refers to the field of this object,
     // distinguishing it from any local variable or parameter that might
     // also be named "performance". Both work here, but "this." makes it clearer.
     @Override
@@ -42,11 +42,10 @@ public class Worker implements calculatePerformance {
     }
 
     // Adds a worker to this worker's list, but only if they are not already in it.
-    // This prevents duplicate entries even if addWorker() is called multiple times
     // with the same worker, satisfying the client's "no duplicates" requirement.
     // stream() converts the list into a pipeline we can query.
     // anyMatch() goes through each element (w) and checks a condition.
-    // w -> w.getId() == worker.getId() is a lambda: for each w in the list,
+    // w -> w.getId() == worker.getId() is a lambda for each w in the list,
     // compare its id to the id of the worker we want to add.
     // If any element matches, anyMatch() returns true and we skip the add.
     public void addWorker(Worker worker){
@@ -66,19 +65,19 @@ public class Worker implements calculatePerformance {
 
     // Uses a stream to search the list by id and returns an Optional.
     // Optional means there might or might not be a result.
-    // This forces the caller to handle the "not found" case explicitly,
+    // This forces the caller to handle the "not found" case,
     // avoiding NullPointerExceptions
     public Optional<Worker> findById(int id){
         return workers.stream()
                 .filter(w -> w.getId() == id)
                 .findFirst();
     }
-    // --- Getters ---
+    //Getters
     public String getName() {return name;}
     public int getId() {return id;}
     public double getSalary() {return salary;}
     public String getJob() {return job;}
-    // --- Setters ---
+    //Setters
     // Immutable identity = consistent, trustworthy references throughout the system.
     public void setName(String name) {this.name = name;}
     public void setSalary(double salary) {this.salary = salary;}
