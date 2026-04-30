@@ -14,8 +14,6 @@ public class Worker implements calculatePerformance {
     private double performance;
 
 
-    private ArrayList<Worker> workers = new ArrayList<>();
-
     public Worker(String name, int id, String job, double salary, double performance) {
         this.name = name;
         this.id = id;
@@ -41,37 +39,6 @@ public class Worker implements calculatePerformance {
         return "LOW";
     }
 
-    // Adds a worker to this worker's list, but only if they are not already in it.
-    // with the same worker, satisfying the client's "no duplicates" requirement.
-    // stream() converts the list into a pipeline we can query.
-    // anyMatch() goes through each element (w) and checks a condition.
-    // w -> w.getId() == worker.getId() is a lambda for each w in the list,
-    // compare its id to the id of the worker we want to add.
-    // If any element matches, anyMatch() returns true and we skip the add.
-    public void addWorker(Worker worker){
-        boolean alreadyExists = workers.stream()
-        .anyMatch(w -> w.getId() == worker.getId());
-        if (!alreadyExists){
-            workers.add(worker);
-        }
-
-    }
-
-    // Returns the full internal list of workers.
-    // Other classes can call this to iterate,
-    public List<Worker> getWorkers() {
-        return workers;
-    }
-
-    // Uses a stream to search the list by id and returns an Optional.
-    // Optional means there might or might not be a result.
-    // This forces the caller to handle the "not found" case,
-    // avoiding NullPointerExceptions
-    public Optional<Worker> findById(int id){
-        return workers.stream()
-                .filter(w -> w.getId() == id)
-                .findFirst();
-    }
     //Getters
     public String getName() {return name;}
     public int getId() {return id;}
@@ -85,6 +52,19 @@ public class Worker implements calculatePerformance {
     public void setPerformance(double performance) {this.performance = performance;}
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Worker)) return false;
+        Worker otro = (Worker) obj;
+        return this.id == otro.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(id);
+    }
+
+    @Override
     public String toString() {
         return "Worker{" +
                 "name='" + name + '\'' +
@@ -92,7 +72,6 @@ public class Worker implements calculatePerformance {
                 ", salary=" + salary +
                 ", job='" + job + '\'' +
                 ", performance=" + performance +
-                ", workers=" + workers +
                 '}';
     }
 }

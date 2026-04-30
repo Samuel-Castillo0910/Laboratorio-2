@@ -47,23 +47,10 @@ public class GestorProyecto {
                 .collect(Collectors.toList());
     }
 
-    public List<Worker> mejoresDesempeños() {
-        return proyectos.stream()
-                .flatMap(p -> p.getTrabajadores().stream())
-                .filter(w -> w.CalculatePerformance() >= 90)
-                .distinct()
-                .collect(Collectors.toList());
-    }
 
     public void mostrarProyectos() {
         for (Proyecto p : proyectos) {
             System.out.println(p);
-            System.out.println("Trabajadores: ");
-            for (Worker w : p.getTrabajadores()) {
-                System.out.println( w.getName()
-                        + " desempeño: " + w.getPerformance()
-                        + " score: " + w.CalculatePerformance());
-            }
         }
     }
 
